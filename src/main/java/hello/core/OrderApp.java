@@ -14,16 +14,12 @@ public class OrderApp {
         MemberService memberService = new MemberServiceImpl();
         OrderService orderService = new OrderServiceImpl();
 
-        // 아이디
         Long memberId = 1L;
-
         Member member = new Member(memberId, "memberA", Grade.VIP);
-
-        // DB에 join 하기
         memberService.join(member);
 
         Order order = orderService.createOrder(memberId, "itemA", 10000);
         System.out.println("order = " + order); // order 클래스 안에 toString 메서드가 호출 된다.
-        System.out.println("order.calculatePrice = " + order.calculatePrice());
+        // System.out.println("order.calculatePrice = " + order.calculatePrice());
     }
 }
