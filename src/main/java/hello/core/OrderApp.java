@@ -11,8 +11,13 @@ import org.springframework.core.annotation.Order;
 public class OrderApp {
 
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
-        OrderService orderService = new OrderServiceImpl();
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+        OrderService orderService = appConfig.orderService();
+
+//        AppConfig 가 생기기 전
+//        MemberService memberService = new MemberServiceImpl();
+//        OrderService orderService = new OrderServiceImpl();
 
         Long memberId = 1L;
         Member member = new Member(memberId, "memberA", Grade.VIP);

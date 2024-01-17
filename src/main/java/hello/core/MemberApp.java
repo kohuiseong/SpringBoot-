@@ -9,7 +9,12 @@ public class MemberApp {
     public static void main(String[] args) {
 
         // 회원가입
-        MemberService memberService = new MemberServiceImpl();
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+
+        // config가 생기기 전
+        // MemberService memberService = new MemberServiceImpl();
+
         Member member = new Member(1L, "memberA", Grade.VIP);
         memberService.join(member);
 
