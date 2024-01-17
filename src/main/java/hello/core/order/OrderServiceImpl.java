@@ -13,11 +13,15 @@ public class OrderServiceImpl implements OrderService {
     // 멤버 정보를 받아 오는 메서드
     private final MemberRepository memberRepository = new MemoryMemberRepository();
 
-    // 할인 금액을 받아 오는 메서드(고정 할인 금액)
+    // 할인 금액을 받아 오는 메서드(고정 할인 금액) - 추상화
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
 
-    // 고객 등급에 따른 할인 금액 메서드
-    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
+    // 고객 등급에 따른 할인 금액 메서드 - 구체화
+    //private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
+
+    // FixDiscountPolicy, RateDiscountPolicy => DIP, OCP 위반 되지 않게 하기 위해서 코드 변경
+    // OrderServiceImpl은 구체화, 추상화 클래스 모두 의존하기 때문에 DIP, OCP 위반
+    private  DiscountPolicy discountPolicy;
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
