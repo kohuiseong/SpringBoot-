@@ -13,6 +13,11 @@ import hello.core.order.OrderServiceImpl;
 // MemberServiceImpl, MemoryMemberRepository, OrderServiceImpl, FixDiscountPolicy
 // MemberServiceImpl -> MemoryMemberServiceImpl
 // OrderServiceImpl -> MemoryMemberRepository, FixDiscountPolicy
+
+// 리펙토링
+// command + option + m
+// MemoryMemberRepository -> memberRepository로 변경
+// DisCount 메서드 만든 후 reuturn 값을 FixDiscountPolicy로 받기
 public class AppConfig {
 
     public MemberService memberService() {
