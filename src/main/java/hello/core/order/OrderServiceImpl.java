@@ -11,7 +11,7 @@ import org.springframework.core.annotation.Order;
 public class OrderServiceImpl implements OrderService {
 
     // 멤버 정보를 받아 오는 메서드
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
 
     // 할인 금액을 받아 오는 메서드(고정 할인 금액) - 추상화
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
@@ -21,7 +21,12 @@ public class OrderServiceImpl implements OrderService {
 
     // FixDiscountPolicy, RateDiscountPolicy => DIP, OCP 위반 되지 않게 하기 위해서 코드 변경
     // OrderServiceImpl은 구체화, 추상화 클래스 모두 의존하기 때문에 DIP, OCP 위반
-    private  DiscountPolicy discountPolicy;
+    private final DiscountPolicy discountPolicy;
+
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
