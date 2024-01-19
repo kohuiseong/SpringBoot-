@@ -4,13 +4,19 @@ import hello.core.member.Grade;
 import hello.core.member.Member;
 import hello.core.member.MemberService;
 import hello.core.member.MemberServiceImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MemberApp {
     public static void main(String[] args) {
 
         // 회원가입
-        AppConfig appConfig = new AppConfig();
-        MemberService memberService = appConfig.memberService();
+//        AppConfig appConfig = new AppConfig();
+//        MemberService memberService = appConfig.memberService();
+        // 스프링 기반 회원 가입
+        // 스프링 컨테이너에 등록되어 있는 메서드를 자동으로 관리 해준다
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        MemberService memberService = applicationContext.getBean("memberService", MemberService.class); //(메서드 이름, 타입.class)
 
         // config가 생기기 전
         // MemberService memberService = new MemberServiceImpl();
