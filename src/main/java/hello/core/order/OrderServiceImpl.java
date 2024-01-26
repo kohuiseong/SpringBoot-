@@ -1,12 +1,8 @@
 package hello.core.order;
 
 import hello.core.discount.DiscountPolicy;
-import hello.core.discount.FixDiscountPolicy;
-import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
-import hello.core.member.MemoryMemberRepository;
-import org.springframework.core.annotation.Order;
 
 /**
  * 설계 변경으로 OrderServiceImpl은 FixDiscountPolicy를 의존하지 않는다
@@ -43,6 +39,11 @@ public class OrderServiceImpl implements OrderService {
         // 할인 정보로 넘기기
         int discountPrice = discountPolicy.discount(member, itemPrice);
 
-        return new Order(memberId, itemName, itemPrice, discountPrice);
+        return new hello.core.order.Order(memberId, itemName, itemPrice, discountPrice);
+    }
+
+    // 테스트 용도
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
     }
 }

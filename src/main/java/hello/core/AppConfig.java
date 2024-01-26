@@ -31,19 +31,33 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
 
+    // 싱글톤 호출
+    // @Bean -> memberService -> new MemoryMemberRepository()
+    // @Bean -> orderService -> new MemoryMemberRepository
+    // 싱글톤은 객체가 하나만 생성이 되어야 하는데 AppConfig 클래스를 확인 하면 두 번 호출이 된다.
+    // 1. call AppConfig.memberService
+    // 2. call AppConfig.memberRepository
+    // 3. call AppConfig.memberRepository
+    // 4. call AppConfig.orderService
+    // 5. call AppConfig.memberRepository
+    // 결과는 총 3번 호출이 된다.
+    // 스프링은 
     @Bean
     public MemberService memberService() {
+        System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository()); // 생성자 주입
         // 나는 MemberServiceImpl 인데 MemoryMemberRepository를 쓸꺼야
     }
 
     @Bean
    public MemoryMemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService() {
+        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
