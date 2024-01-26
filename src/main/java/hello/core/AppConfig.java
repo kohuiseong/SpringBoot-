@@ -41,7 +41,7 @@ public class AppConfig {
     // 4. call AppConfig.orderService
     // 5. call AppConfig.memberRepository
     // 결과는 총 3번 호출이 된다.
-    // 스프링은 
+    // 스프링은 싱글톤이 알아서
     @Bean
     public MemberService memberService() {
         System.out.println("call AppConfig.memberService");
