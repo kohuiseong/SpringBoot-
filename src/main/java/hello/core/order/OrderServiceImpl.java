@@ -3,6 +3,8 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * 설계 변경으로 OrderServiceImpl은 FixDiscountPolicy를 의존하지 않는다
@@ -11,6 +13,7 @@ import hello.core.member.MemberRepository;
  * OrderServiceImpl의 생성자를 통해서 어떤 구현객체을 주입할지는 오직 외부 Appconfig 에서 결정 한다.
  * OrderServiceImpl은 이제부터 실행에만 집중 하면 된다
  */
+@Component
 public class OrderServiceImpl implements OrderService {
 
     // 멤버 정보를 받아 오는 메서드
@@ -26,6 +29,7 @@ public class OrderServiceImpl implements OrderService {
     // OrderServiceImpl은 구체화, 추상화 클래스 모두 의존하기 때문에 DIP, OCP 위반
     private final DiscountPolicy discountPolicy;
 
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;

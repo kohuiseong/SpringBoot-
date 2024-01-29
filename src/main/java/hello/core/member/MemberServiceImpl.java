@@ -1,5 +1,8 @@
 package hello.core.member;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 /** 구현체가 하나만 있으면 관례상 ServiceImpl 사용
  DIP 위반
  MemberServiceImpl은 추상화 MemberServiceImpl, 구체화 MemberService 두 개다 의존 하기 떄문에 좋지 않은 개발 이다
@@ -12,10 +15,13 @@ package hello.core.member;
  * DIP 완성 -> MemoryServiceImpl 은 MemberRepository인 추상에만 의존 하면 된다. 이제 구체 클래스를 몰라도 된다.
  * 관심사의 분리 -> 객체를 생성 하고 연결하는 역할과 실행하는 역할이 명확히 분리 되었다
  */
+@Component
 public class MemberServiceImpl implements MemberService{
 
     // 추상화 에만 의존 한다
     private final MemberRepository memberRepository;
+
+    @Autowired // = ac.getBean(MemberRepository.class), ComponentScan 을 사용하면 자동으로 빈으로 등록 되는데 의존 관계는 주입이 되지 않으므로 Autowired 사용
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
