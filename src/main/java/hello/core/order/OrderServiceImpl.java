@@ -17,8 +17,9 @@ import org.springframework.stereotype.Component;
 public class OrderServiceImpl implements OrderService {
 
     // 멤버 정보를 받아 오는 메서드
-    private final MemberRepository memberRepository;
-    private final DiscountPolicy discountPolicy;
+    private  final MemberRepository memberRepository;
+    private  final DiscountPolicy discountPolicy;
+
     // 할인 금액을 받아 오는 메서드(고정 할인 금액) - 추상화
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
 
@@ -51,11 +52,12 @@ public class OrderServiceImpl implements OrderService {
 
     // @Autowired // 생성자가 하나 일 경우 @Autowired를 생략 해도 된다.
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        System.out.println("memberRepository = " + memberRepository);
-        System.out.println("discountPolicy = " + discountPolicy);
+//        System.out.println("memberRepository = " + memberRepository);
+//        System.out.println("discountPolicy = " + discountPolicy);
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+    
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
