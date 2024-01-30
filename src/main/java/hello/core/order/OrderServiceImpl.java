@@ -29,8 +29,10 @@ public class OrderServiceImpl implements OrderService {
     // OrderServiceImpl은 구체화, 추상화 클래스 모두 의존하기 때문에 DIP, OCP 위반
     private final DiscountPolicy discountPolicy;
 
-    @Autowired
+    // @Autowired // 생성자가 하나 일 경우 @Autowired를 생략 해도 된다.
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        System.out.println("memberRepository = " + memberRepository);
+        System.out.println("discountPolicy = " + discountPolicy);
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
