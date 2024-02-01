@@ -3,6 +3,7 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
  * OrderServiceImpl은 이제부터 실행에만 집중 하면 된다
  */
 @Component
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     // 멤버 정보를 받아 오는 메서드
@@ -51,12 +53,11 @@ public class OrderServiceImpl implements OrderService {
 //    private DiscountPolicy discountPolicy;
 
     // @Autowired // 생성자가 하나 일 경우 @Autowired를 생략 해도 된다.
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-//        System.out.println("memberRepository = " + memberRepository);
-//        System.out.println("discountPolicy = " + discountPolicy);
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+    // RequiredArgsConstructor 어노테이션이 있기때문에 생성자가 필요로 하지 않는다.
+//public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy){
+//    this.memberRepository = memberRepository;
+//    this.discountPolicy = discountPolicy;
+//}
     
 
     @Override

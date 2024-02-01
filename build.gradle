@@ -1,25 +1,21 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.2.1' // 스프링 부트 버전
-	id 'io.spring.dependency-management' version '1.1.4'
+	id("org.springframework.boot") version "2.7.10"
+	id("io.spring.dependency-management") version "1.0.15.RELEASE"
 }
 
-group = 'hello' // group 명
-version = '0.0.1-SNAPSHOT'
-
-java {
-	sourceCompatibility = '17' // Java Version
-}
+group = "hello"
+version = "0.0.1-SNAPSHOT"
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 //lombok 설정 추가 시작
 configurations {
-compileOnly {
-	extendsFrom annotationProcessor
+	compileOnly {
+		extendsFrom annotationProcessor
 	}
 }
+
 //lombok 설정 추가 끝
-
-
 repositories {
 	mavenCentral()
 }
@@ -30,21 +26,15 @@ dependencies {
 	//lombok 라이브러리 추가 시작
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
-	//lombok 라이브러리 추가 끝
 
+	//lombok 라이브러리 추가 끝
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }
-
 test {
-	useJUnitPlatform()
-}
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-
-tasks.named('test') {
 	useJUnitPlatform()
 }
